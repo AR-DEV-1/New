@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Chatbot</title>
+  <style>
+    .chat-container {
+      width: 400px;
+      height: 500px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      overflow-y: scroll;
+    }
+
+    .user-message {
+      color: blue;
+    }
+
+    .bot-message {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <h1>AI Chatbot</h1>
+
+  <div class="chat-container" id="chatContainer"></div>
+
+  <input type="text" id="userInput" placeholder="Type your message..." onkeydown="handleUserInput(event)">
+
+  <script>
+    // Function to handle user input
+    function handleUserInput(event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        const userInput = document.getElementById("userInput");
+        const userMessage = userInput.value;
+        appendMessage(userMessage, "user-message");
+        processUserMessage(userMessage);
+        userInput.value = "";
+      }
+    }
+
+    // Function to process user message and generate a response
+    function processUserMessage(message) {
+      // Simulate AI response
+      const response = generateBotResponse(message);
+
+      // Delay to simulate processing time
+      setTimeout(function() {
+        appendMessage(response, "bot-message");
+      }, 500);
+    }
+
+    // Function to generate a bot response based on user message
+    function generateBotResponse(userMessage) {
+      // Add your AI logic here
+      return "AI: Thank you for your message: " + userMessage;
+    }
+
+    // Function to append a message to the chat container
+    function appendMessage(message, className) {
+      const chatContainer = document.getElementById("chatContainer");
+      const messageElement = document.createElement("p");
+      messageElement.className = className;
+      messageElement.textContent = message;
+      chatContainer.appendChild(messageElement);
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+  </script>
+</body>
+</html>
